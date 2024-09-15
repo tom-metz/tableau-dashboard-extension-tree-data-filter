@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "elm make --output=build/extension-configuration-app.js src/Main.elm"
+  },
+  "devDependencies": {
+    "elm-tooling": "^1.15.1"
+  }
+}

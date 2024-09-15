@@ -1,0 +1,14 @@
+lockfileVersion: 5.4
+
+specifiers:
+  elm-tooling: ^1.15.1
+
+devDependencies:
+  elm-tooling: 1.15.1
+
+packages:
+
+  /elm-tooling/1.15.1:
+    resolution: {integrity: sha512-+rRYa7gzz6l2/Ip2i197MqkW5abOwPOP/+WlyyatLDeDhh+JR0HUMlZJYenCYodBeG/xW5xW3pRYQ2onf5bIAw==}
+    hasBin: true
+    dev: true
