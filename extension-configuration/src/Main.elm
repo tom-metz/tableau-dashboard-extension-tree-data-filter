@@ -5,7 +5,7 @@ import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 
 
-main : Program Flags Model Msg
+main : Program Flags AppState Msg
 main =
     Browser.element
         { init = init
@@ -13,6 +13,12 @@ main =
         , view = view
         , subscriptions = subscriptions
         }
+
+
+type AppState
+    = Loading
+    | Running Model
+    | Error String
 
 
 type alias Flags =
@@ -27,24 +33,24 @@ type Msg
     = None
 
 
-init : Flags -> ( Model, Cmd msg )
+init : Flags -> ( AppState, Cmd msg )
 init _ =
-    ( 0, Cmd.none )
+    ( Loading, Cmd.none )
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
+update : Msg -> AppState -> ( AppState, Cmd msg )
 update msg model =
     case msg of
         None ->
             ( model, Cmd.none )
 
 
-view : Model -> Html Msg
+view : AppState -> Html Msg
 view _ =
     div [ class "row g-5" ]
         [ text "It works!" ]
 
 
-subscriptions : Model -> Sub Msg
+subscriptions : AppState -> Sub Msg
 subscriptions _ =
     Sub.none
