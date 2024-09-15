@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, div, img, text)
+import Html.Attributes exposing (class, height, src, width)
 
 
 main : Program Flags AppState Msg
@@ -46,9 +46,25 @@ update msg model =
 
 
 view : AppState -> Html Msg
-view _ =
-    div [ class "row g-5" ]
-        [ text "It works!" ]
+view appState =
+    let
+        appContent =
+            case appState of
+                Loading ->
+                    img
+                        [ class "d-block mx-auto mb-4", src "./assets/loading-spinner.gif", height 100, width 100 ]
+                        []
+
+                Running _ ->
+                    div [ class "row g-5" ]
+                        [ text "Running" ]
+
+                Error errorText ->
+                    div [ class "row g-5" ]
+                        [ text errorText ]
+    in
+    div [ class "col-12" ]
+        [ appContent ]
 
 
 subscriptions : AppState -> Sub Msg
