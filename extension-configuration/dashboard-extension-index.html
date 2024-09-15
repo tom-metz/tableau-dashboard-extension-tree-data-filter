@@ -31,13 +31,21 @@
         type="text/javascript"
         src="./build/extension-configuration-app.js"
     ></script>
+    <script
+        type="text/javascript"
+        src="./assets/tableau.extensions.1.12.0.min.js"
+    ></script>
     <script type="text/javascript">
         const app = Elm.Main.init({
             node: document.getElementById("tableau-extension-app"),
             flags: 0,
         });
 
-        // app.ports.<function>.subscribe(function (data) {
-        //   })
+        app.ports.loadExtensionConfiguration.subscribe(function () {
+            console.log("loadExtensionConfiguration()");
+
+            app.ports.dashboardExtensionConfiguration.send("hello!");
+            // todo
+        });
     </script>
 </html>

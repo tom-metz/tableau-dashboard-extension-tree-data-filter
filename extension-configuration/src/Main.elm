@@ -1,4 +1,4 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Browser
 import Html exposing (Html, div, img, text)
@@ -30,19 +30,19 @@ type alias Model =
 
 
 type Msg
-    = None
+    = DashboardExtensionConfigurationLoaded String
 
 
 init : Flags -> ( AppState, Cmd msg )
 init _ =
-    ( Loading, Cmd.none )
+    ( Loading, loadExtensionConfiguration "" )
 
 
 update : Msg -> AppState -> ( AppState, Cmd msg )
-update msg model =
+update msg appState =
     case msg of
-        None ->
-            ( model, Cmd.none )
+        DashboardExtensionConfigurationLoaded configuration ->
+            ( appState, Cmd.none )
 
 
 view : AppState -> Html Msg
@@ -68,5 +68,11 @@ view appState =
 
 
 subscriptions : AppState -> Sub Msg
-subscriptions _ =
-    Sub.none
+subscriptions appState =
+    dashboardExtensionConfiguration DashboardExtensionConfigurationLoaded
+
+
+port loadExtensionConfiguration : String -> Cmd msg
+
+
+port dashboardExtensionConfiguration : (String -> msg) -> Sub msg
