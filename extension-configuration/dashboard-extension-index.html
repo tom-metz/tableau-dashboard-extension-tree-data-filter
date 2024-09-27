@@ -35,17 +35,34 @@
         type="text/javascript"
         src="./assets/tableau.extensions.1.12.0.min.js"
     ></script>
+    <script
+        type="text/javascript"
+        src="./build/dashboard-extension-service.js"
+    ></script>
     <script type="text/javascript">
-        const app = Elm.Main.init({
-            node: document.getElementById("tableau-extension-app"),
-            flags: 0,
-        });
+        const t = window.Tableau();
+        t.extensionsInitAsync()
+            .then(function () {
+                const app = Elm.Main.init({
+                    node: document.getElementById("tableau-extension-app"),
+                    flags: 0,
+                });
 
-        app.ports.loadExtensionConfiguration.subscribe(function () {
-            console.log("loadExtensionConfiguration()");
+                app.ports.loadExtensionConfiguration.subscribe(function () {
+                    console.log("loadExtensionConfiguration()");
 
-            app.ports.dashboardExtensionConfiguration.send("hello!");
-            // todo
-        });
+                    const dashboard = t.getDashboard();
+                    const worsheets = t.getAllWorksheets();
+
+                    console.log("Dashboard:", JSON.stringify(2, 0, dashboard));
+                    console.log("Worksheets:", JSON.stringify(2, 0, worsheets));
+
+                    app.ports.dashboardExtensionConfiguration.send("hello!");
+                    // todo
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
     </script>
 </html>
