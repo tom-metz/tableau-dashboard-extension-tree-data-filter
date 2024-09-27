@@ -4,6 +4,7 @@
     "build:debug": "elm make --debug --output=build/extension-configuration-app.js src/Main.elm"
   },
   "devDependencies": {
-    "elm-tooling": "^1.15.1"
+    "elm-tooling": "^1.15.1",
+    "esbuild": "^0.24.0"
   }
 }
